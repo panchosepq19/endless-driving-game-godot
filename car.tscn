@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://cgn8u61oygm8h"]
+
+[ext_resource type="Script" path="res://car.gd" id="1_8ce31"]
+[ext_resource type="Material" uid="uid://cyitsn8cekjia" path="res://light_off.tres" id="2_e6rro"]
+[ext_resource type="Material" uid="uid://wccybjbsm25n" path="res://light_on.tres" id="2_y5w88"]
+[ext_resource type="Material" uid="uid://ck4otcap56kqk" path="res://tire_color.tres" id="4_go15q"]
+[ext_resource type="Material" uid="uid://dru7sdif8gr2b" path="res://headlight_on.tres" id="5_b8854"]
+[ext_resource type="Material" uid="uid://b22se4jjcxaf7" path="res://headlight_off.tres" id="5_u601a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jf5k"]
+size = Vector3(0.927002, 0.691833, 2.19293)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iugv8"]
+albedo_color = Color(1, 0.541176, 0.2, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xn2no"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_g3rde"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ko3r"]
+albedo_color = Color(0.864265, 0.340543, 0.359299, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_15h24"]
+material = SubResource("StandardMaterial3D_7ko3r")
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tdiw"]
+
+[node name="Car" type="CharacterBody3D" node_paths=PackedStringArray("tire_left_back", "tire_right_back", "tire_left_front", "tire_right_front", "brake_light_left", "brake_light_right", "headlight_right", "headlight_left")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000757456, -0.00209856, -0.00220907)
+script = ExtResource("1_8ce31")
+tire_left_back = NodePath("back_left_tire")
+tire_right_back = NodePath("back_right_tire")
+tire_left_front = NodePath("front_left_tire")
+tire_right_front = NodePath("front_right_tire")
+brake_light_left = NodePath("left_brake_light")
+brake_light_right = NodePath("right_brake_light")
+brake_light_material_on = ExtResource("2_y5w88")
+brake_light_material_off = ExtResource("2_e6rro")
+headlight_right = NodePath("right_headlight")
+headlight_left = NodePath("left_headlight")
+headlight_material_on = ExtResource("5_b8854")
+headlight_material_off = ExtResource("5_u601a")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00476074, 0.617823, -0.327789)
+shape = SubResource("BoxShape3D_7jf5k")
+
+[node name="body" type="CSGBox3D" parent="."]
+transform = Transform3D(0.93495, 0, 0, 0, 0.93495, 0, 0, 0, 0.93495, 0.000965834, 0.431429, -0.340896)
+size = Vector3(1, 0.405518, 2.38165)
+material = SubResource("StandardMaterial3D_iugv8")
+
+[node name="back_right_tire" type="CSGBox3D" parent="."]
+transform = Transform3D(1.09688, 0, 0, 0, 1.09688, 0, 0, 0, 1.09688, 0.523775, 0.410194, 0.495686)
+size = Vector3(0.1, 0.3, 0.3)
+material = ExtResource("4_go15q")
+
+[node name="back_left_tire" type="CSGBox3D" parent="."]
+transform = Transform3D(1.09688, 0, 0, 0, 1.09688, 0, 0, 0, 1.09688, -0.523627, 0.410194, 0.495686)
+size = Vector3(0.1, 0.3, 0.3)
+material = ExtResource("4_go15q")
+
+[node name="front_left_tire" type="CSGBox3D" parent="."]
+transform = Transform3D(1.09688, 0, 0, 0, 1.09688, 0, 0, 0, 1.09688, -0.523627, 0.410194, -1.15558)
+size = Vector3(0.1, 0.3, 0.3)
+material = ExtResource("4_go15q")
+
+[node name="front_right_tire" type="CSGBox3D" parent="."]
+transform = Transform3D(1.09688, 0, 0, 0, 1.09688, 0, 0, 0, 1.09688, 0.515533, 0.398825, -1.07592)
+size = Vector3(0.1, 0.3, 0.3)
+material = ExtResource("4_go15q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.844478, 0.535591, 0, -0.535591, 0.844478, -0.0110493, 1.20029, 0.911463)
+visible = false
+fov = 135.9
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.396634, -2.11981)
+
+[node name="left_brake_light" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -1.44212e-09, -0.2, 0, 0.0329919, -8.74228e-09, -0.279007, 0.477015, 0.749354)
+mesh = SubResource("CylinderMesh_xn2no")
+surface_material_override/0 = ExtResource("2_e6rro")
+
+[node name="right_brake_light" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -1.44212e-09, -0.2, 0, 0.0329919, -8.74228e-09, 0.265096, 0.487481, 0.745602)
+mesh = SubResource("CylinderMesh_xn2no")
+surface_material_override/0 = ExtResource("2_e6rro")
+
+[node name="front_bumper" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.848578, 0, 0, 0, -1.37955e-08, 0.378827, 0, -0.315603, -1.65591e-08, 0.00238055, 0.429424, -1.60906)
+mesh = SubResource("PrismMesh_g3rde")
+
+[node name="canopy" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.720591, 0, 0, 0, -3.82339e-08, -0.476381, 0, 0.87469, -2.08233e-08, 0.00448763, 0.628403, -0.209952)
+mesh = SubResource("CapsuleMesh_15h24")
+
+[node name="right_headlight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.199989, 0, 0, 0, 0.124616, 0, 0, 0, 0.104539, 0.130641, 0.441887, -1.64284)
+mesh = SubResource("BoxMesh_5tdiw")
+surface_material_override/0 = ExtResource("5_u601a")
+
+[node name="left_headlight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.199989, 0, 0, 0, 0.124616, 0, 0, 0, 0.104539, -0.113396, 0.439033, -1.64471)
+mesh = SubResource("BoxMesh_5tdiw")
+surface_material_override/0 = ExtResource("5_u601a")

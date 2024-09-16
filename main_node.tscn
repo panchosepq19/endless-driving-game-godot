@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciavqftsmbmv4"]
+
+[ext_resource type="PackedScene" uid="uid://cgn8u61oygm8h" path="res://car.tscn" id="1_lartt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2j5p2"]
+size = Vector3(50, 0.3, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev258"]
+albedo_color = Color(0.43134, 0.43134, 0.43134, 0.705882)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f26sb"]
+size = Vector3(50, 0.3, 50)
+
+[node name="Main_node" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00121689, 1.19209e-07, 0.00512648)
+
+[node name="floor" type="StaticBody3D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_2j5p2")
+surface_material_override/0 = SubResource("StandardMaterial3D_ev258")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_f26sb")
+
+[node name="Car" parent="floor" instance=ExtResource("1_lartt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34212, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999999, -0.000840731, -0.000896515, 0.000896536, 1.07006e-05, 1, -0.000840709, -1, 1.14423e-05, 0, 27.3347, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.68058, 0.732674, 0, -0.732674, 0.68058, 0, 23.0146, 28.3384)
